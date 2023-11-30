@@ -1,14 +1,23 @@
 import { onAuthStateChanged, signOut } from "firebase/auth";
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { auth } from "../Utils/firebase";
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { addUser, removeUser } from "../Utils/Redux/userSlice";
-import { LOGO_URL, USER_ICON_URL } from "../Utils/constants";
+import {
+  LOGO_URL,
+  SUPPORTED_LANGUAGES,
+  USER_ICON_URL,
+} from "../Utils/constants";
+import { toggleGptSearchView } from "../Utils/Redux/gptSlice";
+
+import lang from "../Utils/languageConstants";
+import { changeLanguage } from "../Utils/Redux/configSlice";
 
 const Header = () => {
   const navigate = useNavigate();
   const user = useSelector((store) => store.user);
+  const showGptSearch = useSelector((store) => store.gpt.showGptSearch);
   const dispatch = useDispatch();
 
   const handleSignOut = () => {
@@ -20,6 +29,15 @@ const Header = () => {
         // An error happened.
         navigate("/error");
       });
+  };
+
+  const handleGPTSearchClick = () => {
+    //toggle gpt search button
+    dispatch(toggleGptSearchView());
+  };
+
+  const handleLanguageChange = (e) => {
+    dispatch(changeLanguage(e.target.value));
   };
 
   useEffect(() => {
@@ -46,6 +64,29 @@ const Header = () => {
       <img className="relative z-40 w-48" src={LOGO_URL} alt="logo" />
       {user && (
         <div className="flex align-center justify-center h-2 mt-5 z-50">
+          {showGptSearch && (
+            <select
+              className="p-1 bg-red-600 font-bold text-white h-8 rounded-lg mx-6 my-1"
+              value={lang.identifier}
+              onChange={handleLanguageChange}
+            >
+              {SUPPORTED_LANGUAGES.map((lang) => (
+                <option
+                  key={lang.identifier}
+                  value={lang.identifier}
+                  className="text-white"
+                >
+                  {lang.name}
+                </option>
+              ))}
+            </select>
+          )}
+          <button
+            className="mr-10 font-bold text-white bg-purple-900 h-9 py-1 px-2 rounded-lg"
+            onClick={handleGPTSearchClick}
+          >
+            {showGptSearch ? "HOME" : "GPT SEARCH"}
+          </button>
           <img className="w-8 h-8" alt="userIcon" src={USER_ICON_URL} />
           <button
             onClick={handleSignOut}

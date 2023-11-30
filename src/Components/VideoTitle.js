@@ -3,7 +3,7 @@ import { IoIosInformationCircleOutline } from "react-icons/io";
 
 const VideoTitle = ({ title, overview }) => {
   return (
-    <div className="pt-[20%] px-24 absolute z-10">
+    <div className="pt-[15%] px-24 absolute z-10">
       <h1 className="text-6xl font-bold text-white">{title}</h1>
       <p className="py-6 text-lg w-1/4 text-white">{overview}</p>
       <div className="flex gap-1">
