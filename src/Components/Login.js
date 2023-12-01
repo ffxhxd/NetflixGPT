@@ -89,50 +89,54 @@ const Login = () => {
   return (
     <div>
       <Header />
-      <div className="brightness-50 absolute h-full w-full">
-        <img className="w-full h-full" src={BACKGROUND_URL} alt="logo" />
-      </div>
-      <form
-        onSubmit={(e) => e.preventDefault()}
-        className="w-4/12 rounded-md p-12 absolute my-36 mx-auto right-0 left-0 bg-black flex flex-col align-center justify-center gap-6 bg-opacity-70"
-      >
-        <h1 className="text-3xl text-white p-2 m-2">
-          {isSignIn ? "Sign In" : "Sign Up"}
-        </h1>
-        {!isSignIn && (
+      <div className="">
+        <div className="brightness-50 absolute h-full w-full">
+          <img className="w-full h-full" src={BACKGROUND_URL} alt="logo" />
+        </div>
+        <form
+          onSubmit={(e) => e.preventDefault()}
+          className="sm:w-96 md:w-120 lg:w-1/3 xl:w-1/4 rounded-md p-6 absolute my-36 mx-auto right-0 left-0 bg-black flex flex-col align-center justify-center gap-4 bg-opacity-70"
+        >
+          <h1 className="text-3xl text-white p-2 m-2">
+            {isSignIn ? "Sign In" : "Sign Up"}
+          </h1>
+          {!isSignIn && (
+            <input
+              ref={name}
+              type="name"
+              placeholder="Full Name"
+              className="p-3 m-2 w-full rounded-md bg-slate-200 text-black border-none"
+            />
+          )}
           <input
-            ref={name}
-            type="name"
-            placeholder="Full Name"
-            className="p-4 m-2 w-full rounded-md bg-slate-200 text-black border-none"
+            ref={email}
+            type="email"
+            placeholder="Email"
+            className="p-3 m-2 w-full rounded-md bg-slate-200 text-black border-none"
           />
-        )}
-        <input
-          ref={email}
-          type="email"
-          placeholder="Email"
-          className="p-4 m-2 w-full rounded-md bg-slate-200 text-black border-none"
-        />
-        <input
-          ref={password}
-          type="password"
-          placeholder="Password"
-          className="p-4 m-2 w-full rounded-md bg-slate-200 text-black border-none"
-        />
-        <p className="text-lg font-bold pl-2 text-red-800">{errorMessage}</p>
-        <button
-          className="p-4 m-2 w-full bg-red-700 rounded-md text-xl font-semibold text-white"
-          onClick={handleButtonClick}
-        >
-          {isSignIn ? "Sign In" : "Sign Up"}
-        </button>
-        <p
-          className="text-l p-2 m-2 text-white cursor-pointer"
-          onClick={toggleForm}
-        >
-          {isSignIn ? " New to Netflix?" : "Alreday a user?"}
-        </p>
-      </form>
+          <input
+            ref={password}
+            type="password"
+            placeholder="Password"
+            className="p-3 m-2 w-full rounded-md bg-slate-200 text-black border-none"
+          />
+          <p className="text-base font-bold pl-2 text-red-800">
+            {errorMessage}
+          </p>
+          <button
+            className="p-3 m-2 w-full bg-red-700 rounded-md text-lg font-semibold text-white"
+            onClick={handleButtonClick}
+          >
+            {isSignIn ? "Sign In" : "Sign Up"}
+          </button>
+          <p
+            className="text-base p-2 m-2 text-white cursor-pointer"
+            onClick={toggleForm}
+          >
+            {isSignIn ? "New to Netflix?" : "Already a user?"}
+          </p>
+        </form>
+      </div>
     </div>
   );
 };

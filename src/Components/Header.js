@@ -60,13 +60,13 @@ const Header = () => {
   }, []);
 
   return (
-    <div className="absolute w-full px-8 py-2 flex align-middle justify-between ">
-      <img className="relative z-40 w-48" src={LOGO_URL} alt="logo" />
+    <div className="absolute w-full px-4 sm:px-8 py-2 flex items-center justify-between">
+      <img className="relative z-40 w-24 sm:w-32" src={LOGO_URL} alt="logo" />
       {user && (
-        <div className="flex align-center justify-center h-2 mt-5 z-50">
+        <div className="flex items-center justify-center h-2 mt-2 sm:mt-5 z-50">
           {showGptSearch && (
             <select
-              className="p-1 bg-red-600 font-bold text-white h-8 rounded-lg mx-6 my-1"
+              className="p-1 bg-red-600 font-bold text-white h-8 rounded-lg mx-2 sm:mx-4 my-1 text-sm sm:text-base"
               value={lang.identifier}
               onChange={handleLanguageChange}
             >
@@ -82,15 +82,19 @@ const Header = () => {
             </select>
           )}
           <button
-            className="mr-10 font-bold text-white bg-purple-900 h-9 py-1 px-2 rounded-lg"
+            className="mr-2 sm:mr-4 font-bold text-white bg-purple-900 h-8 py-1 px-2 rounded-lg text-sm sm:text-base"
             onClick={handleGPTSearchClick}
           >
             {showGptSearch ? "HOME" : "GPT SEARCH"}
           </button>
-          <img className="w-8 h-8" alt="userIcon" src={USER_ICON_URL} />
+          <img
+            className="w-5 h-5 sm:w-6 sm:h-6"
+            alt="userIcon"
+            src={USER_ICON_URL}
+          />
           <button
             onClick={handleSignOut}
-            className="h-1 p-2 text-xl ml-2 font-bold text-white "
+            className="p-2 text-sm sm:text-base ml-2 font-bold text-white"
           >
             Sign Out
           </button>
